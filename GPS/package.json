@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/cli": "^14.2.3",
+    "gpx-parser-builder": "^1.0.2"
+  }
+}
