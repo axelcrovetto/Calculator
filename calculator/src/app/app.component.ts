@@ -26,7 +26,7 @@ export class AppComponent {
       if(this.input =="") return;
 
     const prevKey = this.input[this.input.length - 1];
-    if(prevKey === '/' || prevKey ==="+" || prevKey ==="-" || prevKey ==="*") return;
+    if(prevKey === '/' || prevKey ==="+" || prevKey ==="-" || prevKey ==="*" || prevKey ==='√') return;
 
     }
     this.input = this.input + num;
@@ -46,9 +46,8 @@ export class AppComponent {
 
   pressOperator(op : string){
     // max 1 operator per time
-    const lastLKey = this.input[this.input,length-1];
-    if(lastLKey === '/' || lastLKey === '*' || lastLKey === '+' || lastLKey === '-') return;
-
+    const lastKey = this.input[this.input,length-1];
+    if(lastKey === '/' || lastKey === '*' || lastKey === '+' || lastKey === '-' || lastKey === '√') return;
     this.input = this.input + op;
     this.calcAnswer();
   }
@@ -64,32 +63,38 @@ export class AppComponent {
     this.input = '';
   }
 
-  calcAnswer() {
+  calcAnswer():string {
     let formula = this.input;
 
+    if(formula.includes("√")){
+      formula = formula.substr(1,formula.length-1)
+      this.result = ''+Math.sqrt(+formula);
+      return this.result;
+    }
     let lastKey = formula[formula.length - 1];
-
     if (lastKey === '.') {
       formula = formula.substr(0, formula.length - 1);
+      console.log("Formula " + formula);
+      return this.result;
     }
 
     lastKey = formula[formula.length - 1];
 
     if (lastKey === '/' || lastKey === '*' || lastKey === '-' || lastKey === '+' || lastKey === '.') {
       formula = formula.substr(0, formula.length - 1);
+      console.log("Formula " + formula);
+    return this.result;
     }
-
-    console.log("Formula " + formula);
-    this.result = eval(formula);
+    this.result = eval(formula)
+      return  this.result;
   }
 
   getAnswer() {
     this.calcAnswer();
     this.input = this.result;
-    if (this.input == null) {
+    if (this.input == "") {
       this.input = "";
       window.alert("Inserire un numero prima effettuare qualsiasi operazione!");
+    }
   }
-  }
-
 }
