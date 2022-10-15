@@ -92,7 +92,7 @@ export class AppComponent {
   getAnswer() {
     this.calcAnswer();
     this.input = this.result;
-    if (this.input == "") {
+    if (this.input == null) {
       this.input = "";
       window.alert("Inserire un numero prima effettuare qualsiasi operazione!");
     }
